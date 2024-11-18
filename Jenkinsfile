@@ -11,28 +11,23 @@ pipeline{
     stages{
         stage('Checkout'){
             steps{
-                checkout scm
+                git branch: 'main', url: 'https://github.com/UserML2024/Student_Registry_App_Demo.git'
             }
         }
         stage('Install dependencies'){
             steps{
                 script{
-                    if(isUnix()){
-                        sh 'npm install'
-                    }
-                    else{
-                        sh 'npm install'
-
-                    }
+                    
+                        bat 'npm install'
                 }
             }
         }
         stage("Start app and run tests"){
             steps{
                 script{
-                    sh 'npm start &'
-                    sh 'wait-on http://localhost:8090'
-                    sh 'npm test'
+                    bat 'npm start &'
+                    bat 'wait-on http://localhost:8090'
+                    bat 'npm test'
                 }
             }
         }
